@@ -1,12 +1,12 @@
 __author__ = 'philippe'
-from Tkinter import *
+from tkinter import *
 master = Tk()
 
 triangle_size = 0.1
 cell_score_min = -0.2
 cell_score_max = 0.2
 Width = 100
-(x, y) = (5, 5)
+(x, y) = (10, 6)
 actions = ["up", "down", "left", "right"]
 
 board = Canvas(master, width=x*Width, height=y*Width)
@@ -16,7 +16,7 @@ restart = False
 walk_reward = -0.04
 
 walls = [(1, 1), (1, 2), (2, 1), (2, 2)]
-specials = [(4, 1, "red", -1), (4, 0, "green", 1)]
+specials = [(3, 0, "red", -1), (4, 1, "red", -1), (5, 2, "red", -1), (6, 3, "red", -1), (7, 4, "red", -1), (9, 3, "green", 3), (9, 0, "blue", 4), (0, 0, "orange", 0.3)]
 cell_scores = {}
 
 
@@ -57,6 +57,7 @@ def render_grid():
     for (i, j) in walls:
         board.create_rectangle(i*Width, j*Width, (i+1)*Width, (j+1)*Width, fill="black", width=1)
 
+
 render_grid()
 
 
@@ -89,9 +90,9 @@ def try_move(dx, dy):
             score -= walk_reward
             score += w
             if score > 0:
-                print "Success! score: ", score
+                print ("Success score: ", score)
             else:
-                print "Fail! score: ", score
+                print ("Fail score: ", score)
             restart = True
             return
     #print "score: ", score
